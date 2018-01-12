@@ -1,18 +1,18 @@
-Ruff 物联网公有链白皮书 1
+# Ruff 物联网公有链白皮书 [^1]
 
 Working Draft, October 2017, Rev. 0.7.1
 
-摘要
+## 摘要
 
 Ruff 是一个结合物联网和区块链的架构，它包含一个分布式操作系统和一条开放式的主链，从而将虚拟世界的点对点网络及共识机制扩展到线下，实现信息流推动原子流。 在 CAP 三角的选择中，传统区块链是放弃可用性从而强化一致性和分布式容错性，而 Ruff 通过边缘计算和区块链的结合，强化了可用性，从而满足物联网对实时性的弹性需求。
 
 我们要解决的核心问题是不同体系 IoT 设备之间的可信互操作，有偿互操作问题。用来构建开放的 Ruff 生态。
 
-背景
+## 背景
 
 物联网往往是割裂的封闭的体系，广域物联网和局域物联网不能发生交互，私有化部署的工业系统和IDC为基础的IT网络难以连接。然而物联网的数据往往需要较高的一致性和安全性，这是任何一个中心化体系下的技术难以解决的问题。现代的物联网技术往往伴随着冗余性的节点，混合云等技术，然而在一致性和安全性问题上，区块链提供的是最终的解法。可惜的是，区块链的存在着基础设施匮乏，技术门槛较高，技术风险过大的问题，如常被诟病的扩展性问题至今没有较为成熟的解决方案，使得目前的分布式应用稀少且停留在虚拟层面，并不能和真实世界发生交互。
 
-碎片化
+### 碎片化
 
 从物联网诞生的那一天起，它就是碎片化的。街上随处可见的共享单车，不同类别的车你需要不同的手机应用才能打开，这些节点并不等价，没有标准，是碎片化的。 任何品牌的手机都可以通话、联网以及交换数据，为什么交通工具却不行？ 
 
@@ -20,28 +20,32 @@ Ruff 是一个结合物联网和区块链的架构，它包含一个分布式操
 
 碎片化的问题可以不解决吗？答案是否定的。而解决碎片化的一种方式需要引入操作系统以及中间件的概念，兼容碎片化的硬件设备，并提供统一的编程接口。
 
-标准
+### 标准
 
 IT技术是标准化的，个人电脑通过 http 协议和服务器进行交互，在浏览器上呈现出来，这是一种标准化。比特币节点之间的全网广播，也是标准化的。 只有将碎片化的产品不断标准化，才有可能将节点统一起来，或是让节点之间形成一种共识。
 
 在标准化这件事上整个物联网行业尝试了有二十多年，在物理层标准上有 WiFi, BLE, Zigbee 等，工业网络有Modbus, Profibus, 工业以太网等，尽管不同标准之间不能兼容，然而应用层的标准却一直没有推行起来， Machine B 和Machine B 连接成功，但 MachineA 却并不知道任何操纵或是请求 MachineB 的指令。更要命的是，同样是一种设备，不同的驱动，不同软件商的私有协议各不相同，难以交互。
 
+![application protocols](http://okf30m4wz.bkt.clouddn.com/application_protocols.jpg)
 
-
-易用性
+### 易用性
 
 指令有的时候是没有可读性的， GPIO_14号高电平变低电平的这个操作，能否和别的串口兼容，对开关的作用具体是什么，有的时候是未知的。你往往需要下面这样的定义。
 
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-    GPIO_LED.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_11 | GPIO_Pin_14 | GPIO_Pin_15;
-    GPIO_LED.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_LED.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &GPIO_LED);
+```SystemInit();
+RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+GPIO_LED.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_11 | GPIO_Pin_14 | GPIO_Pin_15;
+GPIO_LED.GPIO_Mode = GPIO_Mode_Out_PP;
+GPIO_LED.GPIO_Speed = GPIO_Speed_50MHz;
+GPIO_Init(GPIOB, &GPIO_LED);
+```
 
 但是这种做法很难在互联网应用工程师群体里被推广起来，它的门槛不低，很容易写出bug，而且可读性依然不高。他们更喜欢如下这样的编程方式：
 
-    $('led-green').on();
-    $('led-red').off();
+```
+$('led-green').on();
+$('led-red').off();
+```
 
 上面的这一段就是使用 Ruff OS 编程的代码，更多的可以在 http://www.ruff.io 中查找。截止 2017 年 12 月，全球已有 13521 名工程师在 Ruff 社区注册，其中一半以上都购买了 Ruff 开发板并部署过代码。
 
@@ -51,7 +55,7 @@ IT技术是标准化的，个人电脑通过 http 协议和服务器进行交互
 
 物联网的标准不会在中心化的云端实现，而是在边缘计算的可编程开始，摒弃传统的模块 + 云的模式，应用逻辑会在固件之外，形成统一的编程模型。
 
-不同品牌 IoT 设备之间的可信互操作
+## 不同品牌 IoT 设备之间的可信互操作
 
 每个智能设备有一个地址，出场的时候商家把这个地址写入硬件，并在硬件的包装盒内放置该地址私钥的二维码。 控制中心通过获得私钥后发送给设备一条绑定命令（使用该私钥签名），拥有该硬件的完整控制权。绑定后控制中心可以删除设备的私钥，只需保存控制中心自己的私钥即可
 
@@ -61,13 +65,13 @@ IT技术是标准化的，个人电脑通过 http 协议和服务器进行交互
 
 可以基于上述设施，多厂商共同构建一个开放的 Ruff 生态。
 
-时序数据
+### 时序数据
 
 物联网的数据大多是以时间为序列的，和区块链有天然的结合。盖上时间戳的数据，本身就可以防止重放攻击，解决并发导致的死锁等问题。这些数据在过往割裂的中心化网络中并没有有效地被结合起来，解决数据在流通中的最终一致性问题。我们常见的如产品溯源的场景，往往在产品生产、存储、流通过程中，数据反复被 ERP, MES, WMS 等不同中心化的系统录入，整个环节的一致性是完全没有保障的。
 
 Ruff 的边缘计算节点会以同步的时间戳为核心，控制局域网络内的业务逻辑。时间戳在整个区块链网络是同步的，追溯同一时刻整个网络各节点的行为可以还原网络某一时刻的状态。
 
-共识机制
+### 共识机制
 
 考虑到物联网里主控设备的计算能力，我们选择 DPoS 作为共识算法。
 
@@ -79,7 +83,7 @@ Ruff 的边缘计算节点会以同步的时间戳为核心，控制局域网络
 
 下图演示了代理人总数为 5 情况下的出块情况：
 
-
+![1](http://okf30m4wz.bkt.clouddn.com/1.png)
 
 网络上的资源不是免费的，在任何个包含了多笔物联网合约交易的区块诞生之时，系统将奖励打包区块者。
 
@@ -100,31 +104,31 @@ Ruff 的边缘计算节点会以同步的时间戳为核心，控制局域网络
 
 通过分析链上的 Vote 交易和块的 Slot, Round 值。可以知道哪些候选人没有好好的工作。在一个轮次中，代理人可以发起投票取消某些候选人的资格。如果发行代理人没有按时出块，并且在此后的 24 小时里，该代理人都没有再次出块。那么所有的候选人都会投票要求取消该候选人的资格。
 
-链下控制
+### 链下控制
 
-
+![2](http://okf30m4wz.bkt.clouddn.com/2.png)
 
 在上图的典型结构中，轻节点和控制节点处于同一内网。在轻节点已经绑定控制节点的情况下，允许控制节点脱离主链对轻节点进行控制。
 
 我们使用命令签名技术来达到链下控制的目的。
 
-- 设备初始化：
+- **设备初始化：**
 
  轻节点的设备生产商会在设备中写入一个密钥对的公钥，然后把该密钥对的私钥印刷在设备的说明书或包装盒内（二维码的形式）
 
-- 设备绑定：
+- **设备绑定：**
 
  将轻节点与控制节点放置在可互相通信的网络环境，然后控制节点发起一条绑定命令，该命令包含控制节点的公钥。命令创建后要求输入待绑定设备的私钥来对该绑定命令进行签名。签名完成后命令发送给设备。设备收到该绑定命令后对签名进行验证，验证通过将控制节点的公钥记录下来。控制节点可以不再保存轻节点的私钥
 
-- 控制命令验证：
+- **控制命令验证：**
 
  轻节点收到的命令，只要有其记录的控制节点的签名，就会通过身份认证，同意执行该命令。
 
-- 历史命令上链：
+- **历史命令上链：**
 
  在必要的情况下，控制节点会记录所有已经发送的控制命令，在与主链通信恢复后，把历史记录和控制结果记录发布到主链上。
 
-基于类闪电链的差评机制
+### 基于类闪电链的差评机制
 
 控制节点可以在主链上通过一个 TX:CreateContract 创建一个固定格式合同。合同的内容一般是“如果你给我多少 token，我就允许你在什么限制下使用下列命令”。合同成功创建后会返回保存合同的 Block 高度和该 TX 的 Hash (合称 Contract Addr )
 
@@ -134,29 +138,29 @@ TX:Return 被主链确认后合同执行成功，用户的 Token 会被真正的
 
 如果一个合同有大量的相关产品，那么当后续用户打算执行该合同时，控制 App 会通过交互提示用户该合同有大量差评。
 
-节点分类
+## 节点分类
 
 物联网的节点往往是非常小的运算单元，由于对体积功耗往往都有要求，它们的算力很低，内存很小，MCU 不会超过 512kb, Linux 版本的节点也就是路由器的级别，存储也很小，MCU 的只有 1M 的 Flash， 这样的节点参与共识是非常困难的。 所以物联网的结构一定是由多个节点组成一个网络，这个网络里会有一个或是多个应用，应用通过应用接口和链发生交互，而本地应用所需的计算能力来自边缘计算单元，可以是网关或是路由器。应用可以使用中心化或是去中心化的方式管理局部网络，并和链发生交互。根据这个特点，我们把 Ruff 生态里的节点按下图进行分类：
 
-轻节点（执行者）
+### 轻节点（执行者）
 
  应用控制物的接口，请求网络获取认证信息，核对正确后执行合约给使用者，比如释放物权。 轻节点可由无存储能力的简单设备承担，成本可低至几美金。 
 
-全节点（记录者）
+### 全节点（记录者）
 
  记载全部的信息，参与事件登记或是更改的广播，可将票投给其他节点。 并能成为代表节点。由网络里性能较强的设备扮演。由于未使用 PoW 的共识算法，对全节点的算力要求较低，200 美金的 HTPC，高度路由器，NAS 等家用智能设备均可扮演。
 
-代表节点（仲裁者）
+### 代表节点（仲裁者）
 
  全节点中得票最多的 105 个节点，投票节点要承担坚守规则，打包区块的职责，一旦被发现有恶意行为则会被投票者抛弃，失去代表资格。代表节点可以通过出块获得挖矿收入。
 
-控制节点（SPV钱包）
+### 控制节点（SPV钱包）
 
  有一定的计算能力，能保存所有的区块的头部快速验证一个指定的交易是否上链，能使用 P2P 协议安全的发起一个交易。相对于全节点，不用 24 小时保存在线。一般由智能手机上的 App，或则没有足够存储空间的家用智能设备扮演（比如低端路由器，智能家居的网桥等设备）
 
-  
+ ![3](http://okf30m4wz.bkt.clouddn.com/3.png) 
 
-物的合约（Smart Contract of Things）
+##物的合约（Smart Contract of Things）
 
 物的合约建立在物被抽象的基础上，Dapp 通过 Ruff OS 和物件的抽象进行交互，并和 Ruff Chain 进行链上的交互，这二者相结合，就可以令智能合约在真实世界中执行。比如线下物权的交易就可以通过这样的方式，酒店和房东的门锁，租赁设备的使用开关都可以被合约控制。
 
@@ -164,19 +168,21 @@ TX:Return 被主链确认后合同执行成功，用户的 Token 会被真正的
 
 常见的 Dapp 场景可以是融资租赁，资产证券化，资产质押，供应链金融，物权登记和交易等，传统的区块链技术并不能将物的使用权和生产能力放入合约。 
 
-应用场景
+### 应用场景
 
-物权转让和租用
 
-控制端可以允许绑定到一个定制的智能合约上，用来实现设备使用权的认定。 这类合约的结构类似格式化合同“如果付我 50 个 Token，那么未来 1 个小时内，我会接受你发送的下列控制命令。”，“如果付我 100 个 Token，那么未来 3 个小时内，我会每 10 分钟扣除你 1 个 Token。”链上支持不更新扩张这类格式合同。比使用智能合约更适合区块链的商用项目。
+#### 物权转让和租用
+
+
+控制端可以允许绑定到一个定制的智能合约上，用来实现设备**使用权的认定**。 这类合约的结构类似格式化合同“如果付我 50 个 Token，那么未来 1 个小时内，我会接受你发送的下列控制命令。”，“如果付我 100 个 Token，那么未来 3 个小时内，我会每 10 分钟扣除你 1 个 Token。”链上支持不更新扩张这类格式合同。比使用智能合约更适合区块链的商用项目。
 
 在控制端使用了这类合同后，还会得到一个用来做质量反馈的预签名 TX。
 
-开放数据交易
+#### 开放数据交易
 
 产品、项目的全生命周期管理，产业链上下游可共享实时数据，从而实现如溯源、质量追踪、产能预测和分配等功能。
 
-资产管理和证券化
+#### 资产管理和证券化
 
 资产产生的价值可以被交易，如发电机、矿机、充电桩、共享单车、零售设备等，预计产生的收入可以被证券化，进入流通环节。需要消耗耗材的设备及供应链管理也可以使用这种机制进行反向流通。
 
@@ -186,25 +192,25 @@ TX:Return 被主链确认后合同执行成功，用户的 Token 会被真正的
 
 租赁公司可以考虑把信托公司发行产品作为一条固定的融资渠道，在融资项目调研的同时，与信托公司进行沟通，项目完成后即可同步发行信托产品，减少自有资金占用时间，同时又可以收取相关的费用收益，打造时间短、收益快的新盈利模式。例如，在 Ruff 与某光伏运维企业的合作中，光伏企业生产电能可以被实时被数据化监控并证券化。企业可根据光伏发电情况实时了解设备状态及资产生产效率，同时开放相关数据给用户，获取更加透明和更有公信力的产品信息。
 
+![电站1](http://okf30m4wz.bkt.clouddn.com/5821515123143_.pic.jpg)
 
+![测算](http://okf30m4wz.bkt.clouddn.com/5831515123143_.pic.jpg)
 
-
-
-评价机制
+### 评价机制
 
 当合同执行完成后，用户并未得到预想的结果时，可以收手工提交合同返回的预签名 TX，来发布一个差评。 比如一个自动贩卖机，在扣除了用户的 Token 后，由于机械故障并未给出饮品。用户可以在一定时间内和自动贩卖机的销售方联系，如果问题位解决，就可以通过预签名TX来发表一个差评。 当用户执行的合同差评很多时，控制端会弹出提示。 
 
-代币的使用
+## 代币的使用
 
 Ruff 公有链内置虚拟货币：Ruff 币，由虚拟货币合约实现。Ruff 币是 Ruff 公有链生态系统内激励、消费和交易的基准。
 
-代币的机制
+### 代币的机制
 
 在 Ruff 生态内，会产生一种代币或多种代币（token），作为一种结算标准。消费者在物权或是数据交易过程中会消耗代币。设备使用权和设备产生数据的交易也都会使用代币来结算。任何基于 Ruff 的智能合约都可以声称自己用于结算的代币。然而物联网生态内通过提供相应的节点资源，参与验证、记账等行为的生产者，其获得的代币会使用默认的 Ruff 币，消费者部署合约以及消耗资源所结算的也会是 Ruff 。
 
 举例：用户A 需要向节点B请求获得资源或是使用权，则需要支付一定数量的某种token，同时将该交易打包的代表节点C也将获得奖励，该奖励为 Ruff 。
 
-隐私与安全性
+## 隐私与安全性
 
 由于边缘计算单元承载了绝大多数数据，上报的数据是由应用决定的，应用开发者大部分逻辑都是离线的，在线部分数据的脱敏则由开发者自行控制。
 
@@ -212,19 +218,26 @@ Ruff 的本地自组网也是去中心化的，在一个本地应用网络中，
 
 物联网本身的安全性是由 OS 本身保证的， Ruff 采用对称密钥，密钥在网络中不传输。 此外链网络释放基于时间戳的一次性 token 到应用网络，可对抗重放攻击。
 
-关于 Ruff
+## 关于 Ruff 
 
 Ruff 成立于 2014 年，以边缘计算为核心，替代了原有的嵌入式操作系统，目前拥有上万开发者，是业内最通用的物联网操作系统。团队成员除技术过硬外，还有包括2017年福布斯中国30位30岁以下精英获奖者等殊荣的团队成员，负责项目对外的商务及市场推广。
 
 成立至今，Ruff 获得了广泛的行业的认可度：
 
 - 微软加速器 上海，一期企业
+
 - 2017 GE Predix Hackathon 最佳创新奖
+
 - 2016 Tech Crunch Beijing 创新大赛总冠军
+
 - 2016 GiTC 最佳技术创新奖
+
 - 2016 微软创新峰会最具投资价值奖
 
-合作伙伴
+
+
+
+## 合作伙伴
 
 Ruff 成立至今获得与诸多知名企业达成了合作关系。包括并不限于：
 
@@ -233,17 +246,17 @@ Ruff 成立至今获得与诸多知名企业达成了合作关系。包括并不
 - 百度云
 - muRata 
 
-技术团队
+## 技术团队
 
-Roy Li
+### Roy Li
 
 知名网络安全专家，物联网专家，复旦大学硕士生导师。曾任诺基亚（北美）技术总监，负责OVI开发平台及Symbian操作系统的研发。为Symantec、VeriSign等安全公司提供安全咨询服务。TNB, RealChain, AIDOC 顾问。
 
-Alex Goh
+### Alex Goh
 
 复星投资东南亚负责人，前360云创业合伙人兼总裁，吴业翔在中国及亚太企业级市场营销与商务管理领域有超过15年的管理与经营经验，具有优秀的业绩记录。先后服务于惠普与戴尔两家知名全球IT企业，出任多个部门之高管；曾供职中国惠普并任企业集团副总裁，互联网+新兴行业总经理，及戴尔中国全球商业合作伙伴总经理等高管职务。
 
-投资人团队
+## 投资人团队
 
 - DFund
   - 前墨迹天气联合创始人、知名区块链、数字资产交易所投资人，互联网创业天使投资人创立的基金
@@ -258,20 +271,25 @@ Alex Goh
 - 孔华威  中科计算所上海分所所长
 - 王岳华 德丰杰龙脉基金合伙人
 
-路线图
+## 路线图
 
 Ruff 将是一个基于物联网的全新底层构架平台，有去中心化、开放、开源和高效的特点。在生态系统中，不同的参与方可以通过提供资源获取代币回报，或是消费代币获取资源，并且彼此分享，形成一个经济驱动的自治体。
 
-Ruff 公有链开源计划
+
+## Ruff 公有链开源计划
 
 在我们完善了产品的基础框架之后，我们会对我们的核心模块逐步开源，让更多的研发者们加入。
 
-  日期      	开源内容          
-  2017年12月	超大规模、超低延迟的共识算法
-  2018年04月	超大规模区块链账本算法   
-  2018年10月	智能合约架构算法      
-  2019年03月	Ruff 公有链 平台   
+| **日期**       | **开源内容**       |
+| ------------ | -------------- |
+| **2017年12月** | 超大规模、超低延迟的共识算法 |
+| **2018年04月** | 超大规模区块链账本算法    |
+| **2018年10月** | 智能合约架构算法       |
+| **2019年03月** | Ruff 公有链 平台    |
 
-[1]: THIS DOCUMENT AND ANY OTHER DOCUMENTS PUBLISHED IN ASSOCIATION WITH THIS WHITE PAPER RELATE TO A POTENTIAL TOKEN OFFERING TO PERSONS (CONTRIBUTORS) IN RESPECT OF THE INTENDED DEVELOPMENT AND USE OF THE NETWORK BY VARIOUS PARTICIPANTS. THIS DOCUMENT DOES NOT CONSTITUTE AN OFFER OF SECURITIES OR A PROMOTION, INVITATION OR SOLICITATION FOR INVESTMENT PURPOSES. THE TERMS OF THE CONTRIBUTION ARE NOT INTENDED TO BE A FINANCIAL SERVICES OFFERING DOCUMENT OR A PROSPECTUS. THE TOKEN OFFERING INVOLVES AND RELATES TO THE DEVELOPMENT AND USE OF EXPERIMENTAL SOFTWARE AND TECHNOLOGIES THAT MAY NOT COME TO FRUITION OR ACHIEVE THE OBJECTIVES SPECIFIED IN THIS WHITE PAPER. THE PURCHASE OF TOKENSREPRESENTS A HIGH RISK TO ANY CONTRIBUTORS. TOKENS DO NOT REPRESENT EQUITY, SHARES, UNITS, ROYALTIES OR RIGHTS TO CAPITAL, PROFIT OR INCOME IN THE NETWORK OR SOFTWARE OR IN THE ENTITY THAT ISSUES TOKENS OR ANY OTHER COMPANY OR INTELLECTUAL PROPERTY ASSOCIATED WITH THE NETWORK OR ANY OTHER PUBLIC OR PRIVATE ENTERPRISE, CORPORATION, FOUNDATION OR OTHER ENTITY IN ANY JURISDICTION. THE TOKEN IS NOT THEREFORE INTENDED TO REPRESENT A SECURITY INTEREST.
-[2]: McKinsey Research
-[3]: McKinsey Research
+
+[^1]: THIS DOCUMENT AND ANY OTHER DOCUMENTS PUBLISHED IN ASSOCIATION WITH THIS WHITE PAPER RELATE TO A POTENTIAL TOKEN OFFERING TO PERSONS (CONTRIBUTORS) IN RESPECT OF THE INTENDED DEVELOPMENT AND USE OF THE NETWORK BY VARIOUS PARTICIPANTS. THIS DOCUMENT DOES NOT CONSTITUTE AN OFFER OF SECURITIES OR A PROMOTION, INVITATION OR SOLICITATION FOR INVESTMENT PURPOSES. THE TERMS OF THE CONTRIBUTION ARE NOT INTENDED TO BE A FINANCIAL SERVICES OFFERING DOCUMENT OR A PROSPECTUS. THE TOKEN OFFERING INVOLVES AND RELATES TO THE DEVELOPMENT AND USE OF EXPERIMENTAL SOFTWARE AND TECHNOLOGIES THAT MAY NOT COME TO FRUITION OR ACHIEVE THE OBJECTIVES SPECIFIED IN THIS WHITE PAPER. THE PURCHASE OF TOKENSREPRESENTS A HIGH RISK TO ANY CONTRIBUTORS. TOKENS DO NOT REPRESENT EQUITY, SHARES, UNITS, ROYALTIES OR RIGHTS TO CAPITAL, PROFIT OR INCOME IN THE NETWORK OR SOFTWARE OR IN THE ENTITY THAT ISSUES TOKENS OR ANY OTHER COMPANY OR INTELLECTUAL PROPERTY ASSOCIATED WITH THE NETWORK OR ANY OTHER PUBLIC OR PRIVATE ENTERPRISE, CORPORATION, FOUNDATION OR OTHER ENTITY IN ANY JURISDICTION. THE TOKEN IS NOT THEREFORE INTENDED TO REPRESENT A SECURITY INTEREST.
+
+[^2]: McKinsey Research
+
+[^3]: McKinsey Research
