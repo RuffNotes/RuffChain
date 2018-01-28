@@ -248,8 +248,11 @@ Alex Goh has more than 15 years of management and operations experience in China
 - DFund
 	- Former Ink Weather co-founder, well-known blockchain and digital asset exchange investor, and Internet venture capital investment fund founders. 
 - Fenbushi Capital
+	- Founded in 2015, Fenbushi Capital is the first China-based venture capital firm that exclusively invests in Blockchain-enabled companies. Our mission is to accelerate the inevitable future of Blockchain economy by supporting as many companies as possible.
 - NEO Foundation
+	- NEO is a blockchain platform and cryptocurrency which enables the development of digital assets and smart contracts.
 - LinkVC
+	- LinkVC focuses on working with blockchains, digital money and Internet financial services investments and projects.
 - Concensus Capital
 - Bits Angels
 
