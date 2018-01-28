@@ -239,11 +239,11 @@ Since its founding Ruff has already established partnerships with leading enterp
 
 A well-known expert in network security and the Internet of Things experts, Roy Li is also a senior instructor at Fudan University. As former technical director for Nokia (North America) he was responsible for OVI development and Symbian operating system research and development. He has offered security consulting services for security companies such as Symantec and VeriSign. He has also advised TNB, RealChain, and AIDOC.
 
-### Alex Goh
-
-Alex Goh has more than 15 years of management and operations experience in China and Asia Pacific, including with Fosun Investment Southeast Asia, formerly as a 360 Cloud venture partner and President. He has served at HP and Dell in a number of departmental executive posts, working for Hewlett-Packard as vice president of enterprise groups and Internet + general manager, and as Dell's global business partnerships manager.
-
 ## Investors and Investment Groups
+
+- Alex Goh
+
+Alex Goh has more than 15 years of management and operations experience in China and Asia Pacific. Formerly as a 360 Cloud venture partner and President. He has served at HP and Dell in a number of departmental executive posts, working for Hewlett-Packard as vice president of enterprise groups and Internet + general manager, and as Dell's global business partnerships manager.
 
 - DFund
 	- Former Ink Weather co-founder, well-known blockchain and digital asset exchange investor, and Internet venture capital investment fund founders. 
