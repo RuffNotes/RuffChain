@@ -243,24 +243,32 @@ A well-known expert in network security and the Internet of Things experts, Roy 
 
 Alex Goh has more than 15 years of management and operations experience in China and Asia Pacific, including with Fosun Investment Southeast Asia, formerly as a 360 Cloud venture partner and President. He has served at HP and Dell in a number of departmental executive posts, working for Hewlett-Packard as vice president of enterprise groups and Internet + general manager, and as Dell's global business partnerships manager.
 
-## Investors and investment groups
+## Investors and Investment Groups
 
 - DFund
 	- Former Ink Weather co-founder, well-known blockchain and digital asset exchange investor, and Internet venture capital investment fund founders. 
-- Wenxin Venture Capital Partners
-	- Lanting Juxian (NYSE: LITB) co-founder
-	- Blog China (Beijing) Technologies Ltd. co-founder
-	- US Blog China Technology Co. co-founder
-- Wugang, CEO of Bixin
-- Concensus Capital
-- Fly Future Capital
 - Fenbushi Capital
-- NEO
+- NEO Foundation
+- LinkVC
+- Concensus Capital
 - Bits Angels
-- Bian Jiang, Baidu Lead Product Manager，Senior Vice President；WeXFin founder & CEO，Hongtai Fund Aplus managing partner
-- Kong Huawei, Director of Zhongguancun Shanghai 
-- Wang Yuehua
 
+## Advisors
+
+- Wen Xin
+	- Light in the Box (NYSE: LITB) Co-founder
+	- Blog China Technologies Ltd. Co-founder
+	- Partner, Ceyuan Ventures
+	
+- Wu Gang
+	- CEO of Bixin
+	
+- Bian Jiang
+	- Baidu Lead Product Manager，Senior Vice President；WeXFin founder & CEO，APlus Fund Managing Partner
+- Kong Huawei
+	- Principle, Institution of Computing Technology, Chinese Academy of Science, Shanghai 
+- Richard Wang
+	- Famous Early Stage Investor, Partner at DFJ Dragon Fund.
 
 ## Roadmap
 
