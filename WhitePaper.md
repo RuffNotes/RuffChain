@@ -23,7 +23,7 @@ Do these problems mean there is no possible solution at present? The answer is n
 
 IT technology is standardized overall. For example, personal computers interact with servers through the http protocol presented on the browser, which is a form of standardization. The network for exchanges between different bitcoin nodes is also standardized. Only by constantly standardizing fragmented products will it be possible to unify communication among nodes or create a consensus network among nodes.
 The entire Internet of Things industry has been striving for standardization for over 20 years. On the physical level, standards exist for WiFi, BLE, Zigbee and so on, and at the level of industrial networks there are Modbus, Profibus, industrial ethernet, and so on, through in industrial networks different standards can be incompatible. 
-Nevertheless standardization has not been achieved at the application level. Machine B and Machine B may be able to connect, but Machine A does not know any instructions for manipulating or requesting data from Machine B. Worse still, even within devices different drivers and different software vendors follow different proprietary protocols, making it difficult for applications to interact.
+Nevertheless standardization has not been achieved at the application level. Machine A and Machine B may be able to connect, but Machine A does not know any instructions for manipulating or requesting data from Machine B. Worse still, even within devices different drivers and different software vendors follow different proprietary protocols, making it difficult for applications to interact.
 
 
 ![application protocols](http://okf30m4wz.bkt.clouddn.com/application_protocols.jpg)
@@ -239,37 +239,38 @@ Since its founding Ruff has already established partnerships with leading enterp
 
 A well-known expert in network security and the Internet of Things experts, Roy Li is also a senior instructor at Fudan University. As former technical director for Nokia (North America) he was responsible for OVI development and Symbian operating system research and development. He has offered security consulting services for security companies such as Symantec and VeriSign. He has also advised TNB, RealChain, and AIDOC.
 
-## Investors and Investment Groups
 
+## Advisor and Investors
 - Alex Goh
-
-Alex Goh has more than 15 years of management and operations experience in China and Asia Pacific. Formerly as a 360 Cloud venture partner and President. He has served at HP and Dell in a number of departmental executive posts, working for Hewlett-Packard as vice president of enterprise groups and Internet + general manager, and as Dell's global business partnerships manager.
-
+	- Ex-LeEco Cloud Senior Vice President
+	- Ex-360 Cloud Venture Partner
+	- Ten years of HP & Dell Experience
 - DFund
-	- Former Ink Weather co-founder, well-known blockchain and digital asset exchange investor, and Internet venture capital investment fund founders. 
-- Fenbushi Capital
-	- Founded in 2015, Fenbushi Capital is the first China-based venture capital firm that exclusively invests in Blockchain-enabled companies. Our mission is to accelerate the inevitable future of Blockchain economy by supporting as many companies as possible.
-- NEO Foundation
-	- NEO is a blockchain platform and cryptocurrency which enables the development of digital assets and smart contracts.
-- LinkVC
-	- LinkVC focuses on working with blockchains, digital money and Internet financial services investments and projects.
-- Concensus Capital
-- Bits Angels
-
-## Advisors
-
-- Wen Xin
-	- Light in the Box (NYSE: LITB) Co-founder
-	- Blog China Technologies Ltd. Co-founder
-	- Partner, Ceyuan Ventures
-- Wu Gang
+	- A fund established by former Moji Weather APP Co-Founder
+- Wen Xin 
+	- Ce Yuan Ventures Partner
+	- Lightinthebox Co-Founder
+	- BlogChina Co-Founder
+- Wu Gang,
 	- CEO of Bixin
-- Bian Jiang
-	- Baidu Lead Product Manager，Senior Vice President；WeXFin founder & CEO，APlus Fund Managing Partner
+- Bian Jiang,
+	- Baidu Lead Product Manager
+	- Senior Vice President
+	- WeXFin founder & CEO
+	- Hongtai Fund Aplus managing partner
 - Kong Huawei
-	- Principle, Institution of Computing Technology, Chinese Academy of Science, Shanghai 
-- Richard Wang
-	- Famous Early Stage Investor, Partner at DFJ Dragon Fund.
+	- Director of Institute of Computing Technology Chinese Academy of Sciences Shanghai department 
+- Wang Yuehua
+	- 18 years of OLEA Network & Wavesat experience
+	
+- Concensus Capital
+- Fly Future Capital
+- Fenbushi Capital
+- NEO Foundation
+- Bits Angels
+- Bixin
+- LINKVC
+
 
 ## Roadmap
 
@@ -282,11 +283,14 @@ After firmly establishing the basic framework for advancing the Ruff project, we
 
 | **Time**       | **Open-source implementation**       |
 | ------------ | -------------- |
-| **Dec 2017** | Large-scale, low-latency consensus algorithm |
-| **Apr 2018** | Large-scale blockchain bookkeeping algorithm    |
-| **Oct 2018** | Smart contract algorithm       |
-| **Mar 2019** | Ruff public chain platform    |
-
+| **2018 03** | Consensus mechanism |
+| **2018 06** | Witness nodes network testing     |
+| **2018 09** | Alpha release with  with p2p transfer, ledger implementation      |
+| **2018 12** | Beta testing with simple interface    |
+| **2019 03** | Dpos network  in production, full release   |
+| **2019 06** | Highly scalable clustered full nodes network   |
+| **2019 12** | More secure, reduced fault tolerance | 
+   
 
 [^1]: THIS DOCUMENT AND ANY OTHER DOCUMENTS PUBLISHED IN ASSOCIATION WITH THIS WHITE PAPER RELATE TO A POTENTIAL TOKEN OFFERING TO PERSONS (CONTRIBUTORS) IN RESPECT OF THE INTENDED DEVELOPMENT AND USE OF THE NETWORK BY VARIOUS PARTICIPANTS. THIS DOCUMENT DOES NOT CONSTITUTE AN OFFER OF SECURITIES OR A PROMOTION, INVITATION OR SOLICITATION FOR INVESTMENT PURPOSES. THE TERMS OF THE CONTRIBUTION ARE NOT INTENDED TO BE A FINANCIAL SERVICES OFFERING DOCUMENT OR A PROSPECTUS. THE TOKEN OFFERING INVOLVES AND RELATES TO THE DEVELOPMENT AND USE OF EXPERIMENTAL SOFTWARE AND TECHNOLOGIES THAT MAY NOT COME TO FRUITION OR ACHIEVE THE OBJECTIVES SPECIFIED IN THIS WHITE PAPER. THE PURCHASE OF TOKENSREPRESENTS A HIGH RISK TO ANY CONTRIBUTORS. TOKENS DO NOT REPRESENT EQUITY, SHARES, UNITS, ROYALTIES OR RIGHTS TO CAPITAL, PROFIT OR INCOME IN THE NETWORK OR SOFTWARE OR IN THE ENTITY THAT ISSUES TOKENS OR ANY OTHER COMPANY OR INTELLECTUAL PROPERTY ASSOCIATED WITH THE NETWORK OR ANY OTHER PUBLIC OR PRIVATE ENTERPRISE, CORPORATION, FOUNDATION OR OTHER ENTITY IN ANY JURISDICTION. THE TOKEN IS NOT THEREFORE INTENDED TO REPRESENT A SECURITY INTEREST.
 
